@@ -5,11 +5,13 @@ from django.core.asgi import get_asgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
+django_asgi_app = get_asgi_application()
+
 from realtime.routing import websocket_urlpatterns
 
 application = ProtocolTypeRouter(
     {
-        "http": get_asgi_application(),
+        "http": django_asgi_app,
         "websocket": URLRouter(websocket_urlpatterns),
     }
 )
