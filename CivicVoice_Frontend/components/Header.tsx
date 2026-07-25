@@ -29,12 +29,7 @@ export default function Header() {
   }, [pathname]);
 
   useEffect(() => {
-    const stored = localStorage.getItem("cv-dark-mode");
-    if (
-      stored === "true" ||
-      (!stored &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
+    if (localStorage.getItem("cv-dark-mode") === "true") {
       document.documentElement.classList.add("dark-mode");
     }
   }, []);
