@@ -1,0 +1,32 @@
+# Frontend
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Backend
+.venv/
+venv/
+*.pyc
+__pycache__/
+db.sqlite3
+staticfiles/
+
+# Env files (secrets)
+.env
+.env.local
+.env.*
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
