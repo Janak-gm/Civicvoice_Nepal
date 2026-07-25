@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: civicvoice-backend
+    runtime: python
+    repo: https://github.com/Janak-gm/Civicvoice_Nepal
+    buildCommand: pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput
+    startCommand: daphne -b 0.0.0.0 -p $PORT config.asgi:application
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: False
+      - key: DJANGO_ALLOWED_HOSTS
+        value: .onrender.com,localhost
+      - key: CORS_ALLOWED_ORIGINS
+        value: http://localhost:3000,https://civicvoice-frontend.vercel.app
+      - key: DB_NAME
+        fromDatabase:
+          name: civicvoice-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: civicvoice-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: civicvoice-db
+          property: password
+      - key: DB_HOST
+        fromDatabase:
+          name: civicvoice-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: civicvoice-db
+          property: port
+      - key: CLOUDINARY_CLOUD_NAME
+        value: oydukymq
+      - key: CLOUDINARY_API_KEY
+        value: 115724721858825
+      - key: CLOUDINARY_API_SECRET
+        value: 2X3IyatkamA0fsWTCgCshd_S9PE
+
+databases:
+  - name: civicvoice-db
+    plan: free
