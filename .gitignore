@@ -18,6 +18,9 @@ staticfiles/
 .env.local
 .env.*
 
+# Render (repo-specific config, contains secrets)
+render.yaml
+
 # OS
 .DS_Store
 
