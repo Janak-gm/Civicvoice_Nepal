@@ -107,7 +107,6 @@ export default function SubmitReportPage() {
   const formBoundaryLayer = useRef<any>(null)
   const reportsBoundaryLayer = useRef<any>(null)
   const reportsBoundaryInitialized = useRef(false)
-  const fileInputRef = useRef<HTMLInputElement>(null)
   const wardFromAddressRef = useRef(false)
   const wardFromClickRef = useRef(false)
 
@@ -449,13 +448,6 @@ export default function SubmitReportPage() {
     setDragging(false)
   }, [])
 
-  const handleFileInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.length) {
-      validateAndAddFiles(e.target.files)
-      e.target.value = ""
-    }
-  }, [validateAndAddFiles])
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!user) {
@@ -515,7 +507,6 @@ export default function SubmitReportPage() {
       setLng(null)
       setSelectedFiles([])
       setLightboxFile(null)
-      if (fileInputRef.current) fileInputRef.current.value = ""
       router.push(`/report-details/${result.id}`)
     } catch (err: unknown) {
       const apiErr = handleApiError(err)
@@ -612,15 +603,34 @@ export default function SubmitReportPage() {
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
-                    onClick={() => fileInputRef.current?.click()}>
-                    <input type="file" multiple accept="image/*,video/*" ref={fileInputRef}
-                      onChange={handleFileInputChange} style={{display:'none'}} />
+                    onClick={() => {
+                      const input = document.createElement('input')
+                      input.type = 'file'
+                      input.multiple = true
+                      input.accept = 'image/*,video/*'
+                      input.onchange = (e: Event) => {
+                        const el = e.target as HTMLInputElement
+                        if (el.files?.length) validateAndAddFiles(el.files)
+                      }
+                      input.click()
+                    }}>
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{marginBottom:8,color:'var(--color-muted)'}}>
                       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
                     </svg>
                     <div style={{fontSize:14,color:'var(--color-text)'}}>Drag &amp; drop files here or <strong style={{color:'var(--color-primary)'}}>browse</strong></div>
                     <div style={{fontSize:12,color:'var(--color-muted)',marginTop:4}}>Images: jpg, png, webp (max 10 MB each) &middot; Videos: mp4, mov, webm (max 50 MB each)</div>
-                    <button type="button" onClick={() => fileInputRef.current?.click()} style={{marginTop:12,padding:'8px 24px',background:'var(--color-primary)',color:'#fff',border:'none',borderRadius:'var(--radius-md)',cursor:'pointer',fontWeight:600,fontSize:14}}>Browse Files</button>
+                    <button type="button" onClick={(e) => {
+                      e.stopPropagation()
+                      const input = document.createElement('input')
+                      input.type = 'file'
+                      input.multiple = true
+                      input.accept = 'image/*,video/*'
+                      input.onchange = (ev: Event) => {
+                        const el = ev.target as HTMLInputElement
+                        if (el.files?.length) validateAndAddFiles(el.files)
+                      }
+                      input.click()
+                    }} style={{marginTop:12,padding:'8px 24px',background:'var(--color-primary)',color:'#fff',border:'none',borderRadius:'var(--radius-md)',cursor:'pointer',fontWeight:600,fontSize:14}}>Browse Files</button>
                   </div>
                   {selectedFiles.length > 0 && (
                     <div style={{display:'flex',flexWrap:'wrap',gap:12,marginTop:16}}>
