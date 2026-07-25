@@ -30,3 +30,6 @@ staticfiles/
 # Logs
 *.log
 npm-debug.log*
+
+# Playwright MCP
+.playwright-mcp/
