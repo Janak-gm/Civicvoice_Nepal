@@ -3,7 +3,7 @@ services:
     name: civicvoice-backend
     runtime: python
     repo: https://github.com/Janak-gm/Civicvoice_Nepal
-    buildCommand: cd CivicVoice_backend && pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput
+    buildCommand: cd CivicVoice_backend && pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput && python manage.py ensure_admin
     startCommand: cd CivicVoice_backend && daphne -b 0.0.0.0 -p $PORT config.asgi:application
     envVars:
       - key: DJANGO_SECRET_KEY
@@ -40,6 +40,12 @@ services:
         value: 115724721858825
       - key: CLOUDINARY_API_SECRET
         value: 2X3IyatkamA0fsWTCgCshd_S9PE
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: admin
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: admin@civicvoice.com
+      - key: DJANGO_SUPERUSER_PASSWORD
+        value: Admin@12345
 
 databases:
   - name: civicvoice-db
