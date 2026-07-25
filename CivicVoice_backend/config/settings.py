@@ -151,6 +151,7 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:3000").split(",")
+CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "http://localhost:3000").split(",")
 
 AUTH_USER_MODEL = "accounts.User"
 
