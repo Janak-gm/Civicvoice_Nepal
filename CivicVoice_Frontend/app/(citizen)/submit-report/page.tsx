@@ -615,7 +615,6 @@ export default function SubmitReportPage() {
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onClick={(e) => {
-                      if (e.target !== e.currentTarget) return
                       if (dialogOpenRef.current) return
                       dialogOpenRef.current = true
                       fileInputRef.current?.click()

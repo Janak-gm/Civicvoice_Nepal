@@ -1,0 +1,45 @@
+- generic [active] [ref=f4e1]:
+  - generic [ref=f4e2]:
+    - banner [ref=f4e3]:
+      - generic [ref=f4e4]:
+        - link "CivicVoice" [ref=f4e5] [cursor=pointer]:
+          - /url: /
+        - button "Toggle dark mode" [ref=f4e6] [cursor=pointer]
+        - generic [ref=f4e10]:
+          - link "Login" [ref=f4e11] [cursor=pointer]:
+            - /url: /login
+          - link "Sign Up" [ref=f4e12] [cursor=pointer]:
+            - /url: /signup
+    - main [ref=f4e13]:
+      - generic [ref=f4e15]:
+        - link "CivicVoice" [ref=f4e16] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f4e17]:
+          - button "Citizen" [ref=f4e18] [cursor=pointer]
+          - button "Official" [ref=f4e19] [cursor=pointer]
+        - generic [ref=f4e20]:
+          - paragraph [ref=f4e21]: Sign in to your citizen account
+          - generic [ref=f4e22]:
+            - generic [ref=f4e23]:
+              - generic [ref=f4e24]: Email Address
+              - textbox "Email Address" [ref=f4e25]:
+                - /placeholder: user@example.com
+            - generic [ref=f4e26]:
+              - generic [ref=f4e27]: Password
+              - generic [ref=f4e28]:
+                - textbox "Password" [ref=f4e29]:
+                  - /placeholder: Enter your password
+                - button "" [ref=f4e30] [cursor=pointer]
+            - generic [ref=f4e32]:
+              - generic [ref=f4e33] [cursor=pointer]:
+                - checkbox "Remember me" [ref=f4e34]
+                - text: Remember me
+              - link "Forgot Password?" [ref=f4e35] [cursor=pointer]:
+                - /url: /forgot-password
+            - button "Login" [ref=f4e36] [cursor=pointer]
+          - generic [ref=f4e37]:
+            - text: Don't have an account?
+            - link "Sign Up" [ref=f4e38] [cursor=pointer]:
+              - /url: /signup
+        - text: 
+  - alert [ref=f4e40]
