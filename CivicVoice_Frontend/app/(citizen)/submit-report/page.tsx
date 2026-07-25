@@ -612,17 +612,15 @@ export default function SubmitReportPage() {
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
-                    style={{position:'relative'}}>
+                    onClick={() => fileInputRef.current?.click()}>
                     <input type="file" multiple accept="image/*,video/*" ref={fileInputRef}
-                      onChange={handleFileInputChange}
-                      style={{position:'absolute',inset:0,width:'100%',height:'100%',opacity:0,cursor:'pointer',zIndex:1}} />
-                    <div style={{position:'relative',zIndex:0,pointerEvents:'none'}}>
-                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{marginBottom:8,color:'var(--color-muted)'}}>
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
-                      </svg>
-                      <div style={{fontSize:14,color:'var(--color-text)'}}>Drag &amp; drop files here or <strong style={{color:'var(--color-primary)'}}>browse</strong></div>
-                      <div style={{fontSize:12,color:'var(--color-muted)',marginTop:4}}>Images: jpg, png, webp (max 10 MB each) &middot; Videos: mp4, mov, webm (max 50 MB each)</div>
-                    </div>
+                      onChange={handleFileInputChange} style={{display:'none'}} />
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{marginBottom:8,color:'var(--color-muted)'}}>
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
+                    </svg>
+                    <div style={{fontSize:14,color:'var(--color-text)'}}>Drag &amp; drop files here or <strong style={{color:'var(--color-primary)'}}>browse</strong></div>
+                    <div style={{fontSize:12,color:'var(--color-muted)',marginTop:4}}>Images: jpg, png, webp (max 10 MB each) &middot; Videos: mp4, mov, webm (max 50 MB each)</div>
+                    <button type="button" onClick={() => fileInputRef.current?.click()} style={{marginTop:12,padding:'8px 24px',background:'var(--color-primary)',color:'#fff',border:'none',borderRadius:'var(--radius-md)',cursor:'pointer',fontWeight:600,fontSize:14}}>Browse Files</button>
                   </div>
                   {selectedFiles.length > 0 && (
                     <div style={{display:'flex',flexWrap:'wrap',gap:12,marginTop:16}}>
