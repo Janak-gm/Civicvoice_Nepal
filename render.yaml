@@ -3,8 +3,8 @@ services:
     name: civicvoice-backend
     runtime: python
     repo: https://github.com/Janak-gm/Civicvoice_Nepal
-    buildCommand: pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput
-    startCommand: daphne -b 0.0.0.0 -p $PORT config.asgi:application
+    buildCommand: cd CivicVoice_backend && pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput
+    startCommand: cd CivicVoice_backend && daphne -b 0.0.0.0 -p $PORT config.asgi:application
     envVars:
       - key: DJANGO_SECRET_KEY
         generateValue: true
