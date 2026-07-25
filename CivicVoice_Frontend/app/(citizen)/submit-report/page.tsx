@@ -108,7 +108,6 @@ export default function SubmitReportPage() {
   const reportsBoundaryLayer = useRef<any>(null)
   const reportsBoundaryInitialized = useRef(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const dialogOpenRef = useRef(false)
   const wardFromAddressRef = useRef(false)
   const wardFromClickRef = useRef(false)
 
@@ -451,7 +450,6 @@ export default function SubmitReportPage() {
   }, [])
 
   const handleFileInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    dialogOpenRef.current = false
     if (e.target.files?.length) {
       validateAndAddFiles(e.target.files)
       e.target.value = ""
@@ -614,19 +612,17 @@ export default function SubmitReportPage() {
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
-                    onClick={(e) => {
-                      if (dialogOpenRef.current) return
-                      dialogOpenRef.current = true
-                      fileInputRef.current?.click()
-                      setTimeout(() => { dialogOpenRef.current = false }, 500)
-                    }}>
+                    style={{position:'relative'}}>
                     <input type="file" multiple accept="image/*,video/*" ref={fileInputRef}
-                      onChange={handleFileInputChange} style={{ display: 'none' }} />
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{marginBottom:8,color:'var(--color-muted)'}}>
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
-                    </svg>
-                    <div style={{fontSize:14,color:'var(--color-text)'}}>Drag &amp; drop files here or <strong style={{color:'var(--color-primary)'}}>browse</strong></div>
-                    <div style={{fontSize:12,color:'var(--color-muted)',marginTop:4}}>Images: jpg, png, webp (max 10 MB each) &middot; Videos: mp4, mov, webm (max 50 MB each)</div>
+                      onChange={handleFileInputChange}
+                      style={{position:'absolute',inset:0,width:'100%',height:'100%',opacity:0,cursor:'pointer',zIndex:1}} />
+                    <div style={{position:'relative',zIndex:0,pointerEvents:'none'}}>
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{marginBottom:8,color:'var(--color-muted)'}}>
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
+                      </svg>
+                      <div style={{fontSize:14,color:'var(--color-text)'}}>Drag &amp; drop files here or <strong style={{color:'var(--color-primary)'}}>browse</strong></div>
+                      <div style={{fontSize:12,color:'var(--color-muted)',marginTop:4}}>Images: jpg, png, webp (max 10 MB each) &middot; Videos: mp4, mov, webm (max 50 MB each)</div>
+                    </div>
                   </div>
                   {selectedFiles.length > 0 && (
                     <div style={{display:'flex',flexWrap:'wrap',gap:12,marginTop:16}}>
